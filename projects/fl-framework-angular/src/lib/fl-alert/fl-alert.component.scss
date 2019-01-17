@@ -1,0 +1,38 @@
+// .ops {
+//     opacity :0;
+// }
+@import "theme";
+
+.dialog-card {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    padding-left: 0;
+	padding-right: 0;
+	padding-top: 0;
+	padding-bottom: 10px;
+}
+.dialog-header {
+    height: auto;
+    min-height: 30px;
+    border-radius: 10px 10px 0 0;
+}
+.dialog-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding: 8px 10px;
+}
+.dialog-content {
+    width: 90%;
+    margin: auto;
+    padding: 10px 0;
+}
+.dialog-btn-box {
+    text-align: center;
+}
+.dialog-btn-mrl5{
+    margin-right: 5px;
+    margin-left: 5px;
+}

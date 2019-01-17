@@ -1,0 +1,17 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<div fxLayout="row">
+  <div fxLayout="column">
+    <button mat-raised-button (click)="clearCanvas(cvs1);"><mat-icon>clear</mat-icon></button>
+    <canvas #cvs1 width="500" height="300" style="border:1px solid black;" drawing lineWidth="3"></canvas>
+  </div>
+  <div fxLayout="column">
+      <button mat-raised-button (click)="clearCanvas(cvs2);"><mat-icon>clear</mat-icon></button>
+    <canvas #cvs2 style="border:1px solid black;width: 500px;height: 300px;" drawing></canvas>
+  </div>
+</div>
+<router-outlet></router-outlet>

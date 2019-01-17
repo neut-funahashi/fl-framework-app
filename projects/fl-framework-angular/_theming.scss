@@ -1,0 +1,14 @@
+@import './src/lib/fl-alert/theme';
+
+@mixin fl-framework-theme($info:#53c1dc, $question:#2a7cb4, $complete:#59b764,$warning:#f3ab58,$error:#F44336) {
+    @include fl-alert-theme($info, $question, $complete,$warning,$error);
+}
+.transparent .mat-dialog-container {
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.0);
+}
+@mixin fl-framework-wait-dialog($color:#3f51b5) {
+    .mat-progress-spinner circle, .mat-spinner circle {
+        stroke: $color!important;
+    }
+}

@@ -1,0 +1,5 @@
+{
+    "entry": "projects/fl-framework-angular/_theming.scss",
+    "dest": "./dist/fl-framework-angular/_theming.scss",
+    "ignoredImports": ["~@angular/.*"]
+ }

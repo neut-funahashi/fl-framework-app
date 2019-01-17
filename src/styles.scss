@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+@import '../dist/fl-framework-angular/theming';
+/* You can add global styles to this file, and also import other style files */
+
+html {     
+    height: 100vh;
+}
+body {  margin: 0; }
+
+//@include fl-framework-theme(#118d83,#123456,#123456,#123456,#123456);
+@include fl-framework-theme();
+@include fl-framework-wait-dialog(#654321);

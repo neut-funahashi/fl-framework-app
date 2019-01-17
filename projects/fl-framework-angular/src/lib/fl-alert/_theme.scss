@@ -1,0 +1,19 @@
+@import '~@angular/material/theming';
+
+@mixin fl-alert-theme($info:#53c1dc, $question:#2a7cb4, $complete:#59b764,$warning:#f3ab58,$error:#F44336) {
+    .dialog-kind-information {
+        background-color: $info;
+    }
+    .dialog-kind-question {
+        background-color: $question;
+    }
+    .dialog-kind-complete {
+        background-color: $complete;
+    }
+    .dialog-kind-warning {
+        background-color: $warning;
+    }
+    .dialog-kind-error {
+        background-color: $error;
+    }
+}
