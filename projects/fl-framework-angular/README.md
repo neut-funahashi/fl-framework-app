@@ -4,7 +4,7 @@
 
 ### install
 ```npm
-npm install fl-framework-angular
+npm install fl-framework-angular @angular/flex-layout
 ```
 
 ### app.module.ts
@@ -20,7 +20,18 @@ import { FlFrameworkModule, FrameworkModule } from 'fl-framework-angular';
     ...
     FlFrameworkModule
   ],
-  providers: [],
+  providers: [
+    {
+      //custom call setting
+      provide: 'flRequestEndPoint', useValue:
+      {
+        host: '',  //Call from the default caller.
+        contextName: '_api',   //server addr(URI) + / + contextName + / <serviceName> + / <methodName> + /
+        appVersion: '0.0.1',   //Add version number to http header.
+        versionName: 'version' //http header name.
+      }
+    }
+  ],
   bootstrap: [...]
 })
 export class AppModule extends FrameworkModule {

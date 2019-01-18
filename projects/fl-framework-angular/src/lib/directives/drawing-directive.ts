@@ -30,9 +30,8 @@ export class DrawingDirective implements OnDestroy, AfterViewInit {
     }
 
     private draw = (e: any) => {
-        let offset = this.getOffset(this.canvas);
-        let x = e.pageX - offset.x;
-        let y = e.pageY - offset.y;
+        let x = e.offsetX;
+        let y = e.offsetY;
 
         if (this.ctx && this.lastPt != null) {
             this.ctx.beginPath();
@@ -83,9 +82,9 @@ export class DrawingDirective implements OnDestroy, AfterViewInit {
         return null;
     }
 
-    private getOffset(element:HTMLElement):{x:number,y:number} {
-        let y = element.offsetTop;
-        let x = element.offsetLeft;
-        return {x:x,y:y};
-    }
+    // private getOffset(element:HTMLElement):{x:number,y:number} {
+    //     let y = element.offsetTop;
+    //     let x = element.offsetLeft;
+    //     return {x:x,y:y};
+    // }
 }
