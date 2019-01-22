@@ -13,8 +13,10 @@ export class TopComponentComponent extends FlComponentBase {
   initializeView(): void {
   }
   createCompleteView(): void {
-    this.init({}).subscribe((result)=>{
-
+    this.init({'__headers__':{'APPEND-HEADER-PARAM':'1234567890'}}).subscribe((result)=>{
+      console.log(result);
+    },(error)=>{
+      console.log(error);
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlAlertService } from 'fl-framework-angular';
+import { FlAlertService, FlComponentBase } from 'fl-framework-angular';
 import { WaitDialogService } from 'fl-framework-angular';
 import { isEmpty,clearCanvas } from 'fl-framework-angular';
 import { FlHttpRequestService } from 'fl-framework-angular';
@@ -9,7 +9,11 @@ import { FlHttpRequestService } from 'fl-framework-angular';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent extends FlComponentBase {
+  initializeView(): void {
+  }
+  createCompleteView(): void {
+  }
   public lineW:Number;
 
   ngOnInit(): void {
@@ -30,8 +34,8 @@ export class AppComponent implements OnInit{
     clearCanvas(element);
   }
 
-  constructor(private alert:FlAlertService,private waitDialog:WaitDialogService,private flService:FlHttpRequestService) {
+  constructor(private waitDialog:WaitDialogService) {
+    super();
     this.lineW = 1;
-
   }
 }

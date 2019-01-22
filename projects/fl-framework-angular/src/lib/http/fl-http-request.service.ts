@@ -22,6 +22,13 @@ export class FlHttpRequestService {
     var flHeaders = {};
     flHeaders['FRAMEWORK-HTTP-HEADER'] = this.config.appVersion;
     flHeaders[this.config.versionName] = this.config.appVersion;
+    if (param['__headers__'] != null) {
+      let appendHeaders = param['__headers__'];
+      for (let key in appendHeaders) {
+        flHeaders[key] = appendHeaders[key];
+      }
+      delete param['__headers__'];
+    }
     var httpOptions = {
       headers: new HttpHeaders(flHeaders)
     };
