@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { isEmpty } from '../utils/fi-utils';
 
 @Component({
   selector: 'app-fl-alert',
@@ -77,6 +78,28 @@ export class AlertLabels {
   static NO_LABEL: String = "No";
   static OK_LABEL: String = "OK";
   static CANCEL_LABEL: String = "Cancel";
+
+  static updateLabels(yesLabel?:string,noLabel?:string,okLabel?:string,cancelLabel?:string) {
+    if (!isEmpty(yesLabel)) {
+      this.YES_LABEL = yesLabel;
+    }
+    if (!isEmpty(noLabel)) {
+      this.NO_LABEL = noLabel;
+    }
+    if (!isEmpty(okLabel)) {
+      this.OK_LABEL = okLabel;
+    }
+    if (!isEmpty(cancelLabel)) {
+      this.CANCEL_LABEL = cancelLabel;
+    }
+  }
+
+  static setDefault() {
+    this.YES_LABEL = "Yes";
+    this.NO_LABEL = "No";
+    this.OK_LABEL = "OK";
+    this.CANCEL_LABEL = "Cancel";
+  }
 }
 export enum AlertFlags {
   YES = 0x0001,
