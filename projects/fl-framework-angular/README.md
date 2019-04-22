@@ -104,7 +104,7 @@ export class AppComponent extends FlComponentBase {
 $primary: mat-palette($mat-blue, A200);
 $accent:  mat-palette($mat-orange, A400);
 $warn:    mat-palette($mat-teal, 500);
-$theme: mat-light-theme($primary, $faccent, $warn);
+$theme: mat-light-theme($primary, $accent, $warn);
 
 @include angular-material-theme($theme);
 
