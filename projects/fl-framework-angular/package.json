@@ -3,8 +3,8 @@
   "version": "8.0.0",
   "license" : "MIT",
   "peerDependencies": {
-    "@angular/common": "^8.0.3",
-    "@angular/core": "^8.0.3",
+    "@angular/common": "^8.1.0",
+    "@angular/core": "^8.1.0",
     "@angular/flex-layout": "^8.0.0-beta.26"
   },
   "repository": {
