@@ -8,37 +8,37 @@ import { WaitDialogComponent } from './progress/wait-dialog.component';
 
 // popup
 export const FrameworkPopupComponents = [
-    FlAlertComponent,
-    WaitDialogComponent
+  FlAlertComponent,
+  WaitDialogComponent
 ];
 // component
 export const FrameworkComponents = [
-    
-]
+
+];
 // directive
 export const FrameworkDirectives = [
-    ParentClickDirective,
-    DrawingDirective
-]
+  ParentClickDirective,
+  DrawingDirective
+];
 // provider
 export const FrameworkProviders = [
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'transparent', hasBackdrop: true, disableClose: true, autoFocus: true } }
-]
+  { provide: MAT_DIALOG_DATA, useValue: {} },
+  { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { panelClass: 'transparent', hasBackdrop: true, disableClose: true, autoFocus: true } }
+];
 
 export const FrameworkDeclarationsComponents = [
-    FrameworkPopupComponents,
-    FrameworkComponents,
-    FrameworkDirectives
+  FrameworkPopupComponents,
+  FrameworkComponents,
+  FrameworkDirectives
 ];
 
 export const FrameworkEntryComponents = [
-    FrameworkPopupComponents
+  FrameworkPopupComponents
 ];
 
 // @dynamic
 export class FrameworkModule {
-    constructor(protected injector: Injector) {
-        FlServiceInjector.injector = injector;
-    }
+  constructor(protected injector: Injector) {
+    FlServiceInjector.injector = injector;
+  }
 }

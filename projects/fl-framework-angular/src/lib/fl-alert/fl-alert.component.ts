@@ -1,36 +1,71 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { isEmpty } from '../utils/fi-utils';
 
+export enum AlertFlags {
+  YES = 0x0001,
+  NO = 0x0002,
+  OK = 0x0004,
+  CANCEL = 0x0008
+}
+
+export enum AlertKinds {
+  /**
+   * メッセージの種類：情報
+   */
+  MSG_KIND_INFOMATION = 0,
+  /**
+   * メッセージの種類：問い
+   */
+  MSG_KIND_QUESTION = 1,
+
+  /**
+   * メッセージの種類：完了
+   */
+  MSG_KIND_COMPLETE = 2,
+
+  /**
+   * メッセージの種類：警告
+   */
+  MSG_KIND_WARNING = 3,
+
+  /**
+   * メッセージの種類：エラー
+   */
+  MSG_KIND_ERROR = 4
+}
+
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'app-fl-alert',
   templateUrl: './fl-alert.component.html',
   styleUrls: ['./fl-alert.component.scss']
 })
 export class FlAlertComponent implements OnInit {
 
-  public yesLabel: String = "Yes";
-  public noLabel: String = "No";
-  public okLabel: String = 'OK';
-  public cancelLabel: String = 'Cancel';
+  public yesLabel = 'Yes';
+  public noLabel = 'No';
+  public okLabel = 'OK';
+  public cancelLabel = 'Cancel';
 
-  public showYes: Boolean = true;
-  public showNo: Boolean = true;
-  public showOk: Boolean = true;
-  public showCancel: Boolean = true;
+  public showYes = true;
+  public showNo = true;
+  public showOk = true;
+  public showCancel = true;
 
-  public kindClass: String = '';
+  public kindClass = '';
 
-  constructor(public dialogRef: MatDialogRef<FlAlertComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.showYes = ((data.flags & AlertFlags.YES) != 0) ? true : false;
-    this.showNo = ((data.flags & AlertFlags.NO) != 0) ? true : false;
-    this.showOk = ((data.flags & AlertFlags.OK) != 0) ? true : false;
-    this.showCancel = ((data.flags & AlertFlags.CANCEL) != 0) ? true : false;
+  constructor(public dialogRef: MatDialogRef<FlAlertComponent>, public labels: AlertLabels, @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    this.okLabel = AlertLabels.OK_LABEL;
-    this.yesLabel = AlertLabels.YES_LABEL;
-    this.noLabel = AlertLabels.NO_LABEL;
-    this.cancelLabel = AlertLabels.CANCEL_LABEL;
+    this.showYes = ((data.flags & AlertFlags.YES) !== 0) ? true : false;
+    this.showNo = ((data.flags & AlertFlags.NO) !== 0) ? true : false;
+    this.showOk = ((data.flags & AlertFlags.OK) !== 0) ? true : false;
+    this.showCancel = ((data.flags & AlertFlags.CANCEL) !== 0) ? true : false;
+
+    this.okLabel = labels.OK_LABEL;
+    this.yesLabel = labels.YES_LABEL;
+    this.noLabel = labels.NO_LABEL;
+    this.cancelLabel = labels.CANCEL_LABEL;
 
     switch (data.kind) {
       case AlertKinds.MSG_KIND_INFOMATION:
@@ -64,22 +99,25 @@ export class FlAlertComponent implements OnInit {
     this._close(AlertFlags.CANCEL);
   }
   ngOnInit() {
-    //this.dialogRef.updateSize('80%');
+    // this.dialogRef.updateSize('80%');
   }
-  private _close(result:any) {
+  private _close(result: any) {
     if (this.data.callback) {
       this.data.callback(result);
     }
     this.dialogRef.close(result);
   }
 }
+@Injectable({
+  providedIn: 'root'
+})
 export class AlertLabels {
-  static YES_LABEL: String = "Yes";
-  static NO_LABEL: String = "No";
-  static OK_LABEL: String = "OK";
-  static CANCEL_LABEL: String = "Cancel";
+  YES_LABEL = 'Yes';
+  NO_LABEL = 'No';
+  OK_LABEL = 'OK';
+  CANCEL_LABEL = 'Cancel';
 
-  static updateLabels(yesLabel?:string,noLabel?:string,okLabel?:string,cancelLabel?:string) {
+  updateLabels(yesLabel?: string, noLabel?: string, okLabel?: string, cancelLabel?: string) {
     if (!isEmpty(yesLabel)) {
       this.YES_LABEL = yesLabel;
     }
@@ -94,58 +132,10 @@ export class AlertLabels {
     }
   }
 
-  static setDefault() {
-    this.YES_LABEL = "Yes";
-    this.NO_LABEL = "No";
-    this.OK_LABEL = "OK";
-    this.CANCEL_LABEL = "Cancel";
+  setDefault() {
+    this.YES_LABEL = 'Yes';
+    this.NO_LABEL = 'No';
+    this.OK_LABEL = 'OK';
+    this.CANCEL_LABEL = 'Cancel';
   }
 }
-export enum AlertFlags {
-  YES = 0x0001,
-  NO = 0x0002,
-  OK = 0x0004,
-  CANCEL = 0x0008
-};
-
-export enum AlertKinds {
-  /**
-   * メッセージの種類：情報
-   */
-  MSG_KIND_INFOMATION = 0,
-  /**
-   * メッセージの種類：問い
-   */
-  MSG_KIND_QUESTION = 1,
-
-  /**
-   * メッセージの種類：完了
-   */
-  MSG_KIND_COMPLETE = 2,
-
-  /**
-   * メッセージの種類：警告
-   */
-  MSG_KIND_WARNING = 3,
-
-  /**
-   * メッセージの種類：エラー
-   */
-  MSG_KIND_ERROR = 4
-};
-
-namespace FlAlert {
-  export enum AlertFlags {
-    YES = AlertFlags.YES,
-    NO = AlertFlags.NO,
-    OK = AlertFlags.OK,
-    CANCEL = AlertFlags.CANCEL
-  };
-  export enum AlertKinds {
-    MSG_KIND_INFOMATION = AlertKinds.MSG_KIND_INFOMATION,
-    MSG_KIND_QUESTION = AlertKinds.MSG_KIND_QUESTION,
-    MSG_KIND_COMPLETE = AlertKinds.MSG_KIND_COMPLETE,
-    MSG_KIND_WARNING = AlertKinds.MSG_KIND_WARNING,
-    MSG_KIND_ERROR = AlertKinds.MSG_KIND_ERROR
-  };
-};

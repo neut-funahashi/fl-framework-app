@@ -5,18 +5,19 @@ import { endsWithCharAppend } from '../utils/fi-utils';
  * @param milliseconds ミリ秒
  */
 export function delayBy(milliseconds: number) {
-    return function (target, key, descriptor) {
+  // tslint:disable-next-line: only-arrow-functions
+  return function(target, key, descriptor) {
 
-        var originalMethod = descriptor.value;
+    const originalMethod = descriptor.value;
 
-        descriptor.value = function (...args) {
-            setTimeout(() => {
-                originalMethod.apply(this, args);
-            }, milliseconds);
+    descriptor.value = function(...args) {
+      setTimeout(() => {
+        originalMethod.apply(this, args);
+      }, milliseconds);
 
-        };
-        return descriptor;
-    }
+    };
+    return descriptor;
+  };
 }
 /**
  * ClassDecorator
@@ -24,13 +25,14 @@ export function delayBy(milliseconds: number) {
  * @param name サービス名
  */
 export function FlServiceName(name?: string) {
-    return <TFunc extends Function>(target: TFunc) => {
-        if (name) {
-            var serviceName = endsWithCharAppend(name, 'Service');
-            target.prototype['serviceName'] = serviceName;
-        }
-    };
-};
+  // tslint:disable-next-line: ban-types
+  return <TFunc extends Function>(target: TFunc) => {
+    if (name) {
+      const serviceName = endsWithCharAppend(name, 'Service');
+      target.prototype.serviceName = serviceName;
+    }
+  };
+}
 
 // export function ServiceName(name:string) {
 // return function (target: any) {

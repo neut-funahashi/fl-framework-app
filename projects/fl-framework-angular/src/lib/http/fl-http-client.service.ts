@@ -12,9 +12,10 @@ export class FlHttpClientService {
 
   constructor(private http: HttpClient, private waitDialogService: WaitDialogService) { }
 
-  public retryCount: number = 0;
+  public retryCount = 0;
 
-  post<T>(url: string, param: Object, httpOptions: Object = null, isDisplay: Boolean = true): Observable<T> {
+  // tslint:disable-next-line: ban-types
+  post<T>(url: string, param: any, httpOptions: Object = null, isDisplay: boolean = true): Observable<T> {
     if (isDisplay) {
       this.waitDialogService.show();
     }
@@ -42,9 +43,9 @@ export class FlHttpClientService {
       );
   }
 
-  get<T>(url: string, params?: Object, isDisplay: Boolean = true): Observable<T> {
-    var queryString: String = this.convertParams(params).toString();
-    var apiUrl = queryString ? url + '?' + queryString : url;
+  get<T>(url: string, params?: any, isDisplay: boolean = true): Observable<T> {
+    const queryString: string = this.convertParams(params).toString();
+    const apiUrl = queryString ? url + '?' + queryString : url;
     if (isDisplay) {
       this.waitDialogService.show();
     }
@@ -72,9 +73,9 @@ export class FlHttpClientService {
   }
 
 
-  getp<T>(url: string, params?: Object, isDisplay: Boolean = true): Observable<T> {
-    var queryString: String = this.convertParams(params).toString();
-    var apiUrl = queryString ? url + '?' + queryString : url;
+  getp<T>(url: string, params?: any, isDisplay: boolean = true): Observable<T> {
+    const queryString = this.convertParams(params).toString();
+    const apiUrl = queryString ? url + '?' + queryString : url;
     if (isDisplay) {
       this.waitDialogService.show();
     }
@@ -101,9 +102,9 @@ export class FlHttpClientService {
     );
   }
 
-  private convertParams(params: Object): HttpParams {
-    var result: HttpParams = new HttpParams({});
-    for (var key in params) {
+  private convertParams(params: any): HttpParams {
+    let result: HttpParams = new HttpParams({});
+    for (const key of Object.keys(params) )  {
       result = result.set(key, params[key]);
     }
     return result;

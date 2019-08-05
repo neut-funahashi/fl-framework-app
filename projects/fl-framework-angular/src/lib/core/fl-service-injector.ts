@@ -1,4 +1,4 @@
-import { Injector } from "@angular/core";
+import { Injector } from '@angular/core';
 
 // @dynamic
 export class FlServiceInjector {

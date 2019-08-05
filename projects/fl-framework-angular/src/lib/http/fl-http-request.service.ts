@@ -14,55 +14,60 @@ import { tap } from 'rxjs/operators';
 export class FlHttpRequestService {
 
   constructor(private http: FlHttpClientService,
-    @Inject('flRequestEndPoint') private config: FlHttpEndPoint,
-    private alert: FlAlertService,
-    private router: Router) { }
+              @Inject('flRequestEndPoint') private config: FlHttpEndPoint,
+              private alert: FlAlertService) { }
 
-  public post<T extends IReturnDto>(serviceName: string, methodName: string, param: any, isDisplay: boolean = true, isErrorAlert:boolean = true): Observable<T> {
-    var flHeaders = {};
+  public post<T extends IReturnDto>(serviceName: string,
+                                    methodName: string,
+                                    param: any,
+                                    isDisplay: boolean = true,
+                                    isErrorAlert: boolean = true): Observable<T> {
+    const flHeaders = {};
     flHeaders['FRAMEWORK-HTTP-HEADER'] = this.config.appVersion;
     flHeaders[this.config.versionName] = this.config.appVersion;
-    if (param['__headers__'] != null) {
-      let appendHeaders = param['__headers__'];
-      for (let key in appendHeaders) {
+    if (param.__headers__ != null) {
+      const appendHeaders = param.__headers__;
+      for (const key of Object.keys(appendHeaders)) {
         flHeaders[key] = appendHeaders[key];
       }
-      delete param['__headers__'];
+      delete param.__headers__;
     }
-    var httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders(flHeaders)
     };
     return this.http.post<T>(this.createUrl(serviceName, methodName), param, httpOptions, isDisplay ? true : isDisplay)
-    .pipe(
-      tap(result => {
-        if (result) {
-          //権限エラー
-          //再描画が必要なパターン
-          //メッセージ表示
-          if (isErrorAlert && result.result && !result.result.success) {
+      .pipe(
+        tap(result => {
+          if (result) {
+            // 権限エラー
+            // 再描画が必要なパターン
+            // メッセージ表示
+            if (isErrorAlert && result.result && !result.result.success) {
 
-            this.alert.show(result.result.message, result.result.msgId, AlertFlags.OK, result.result.msgKind);
+              this.alert.show(result.result.message, result.result.msgId, AlertFlags.OK, result.result.msgKind);
+            }
           }
-        }
-      }, (error) => {
-        this.alert.showError('サーバとの通信に失敗しました。\n申し訳ございませんが、しばらくしてから再度実行してください。'
-          , 'Error', AlertFlags.OK);
-      })
-    );
+        }, (error) => {
+          this.alert.showError('サーバとの通信に失敗しました。\n申し訳ございませんが、しばらくしてから再度実行してください。'
+            , 'Error', AlertFlags.OK);
+        })
+      );
   }
 
   private createUrl(serviceName: string, methodName: string): string {
     if (this.config == null) {
-      throw new Error("providers: provide: 'flRequestEndPoint' is not found.\nPlease set up FlHttpEndPoint.");
+      throw new Error('providers: provide: \'flRequestEndPoint\' is not found.\nPlease set up FlHttpEndPoint.');
     }
-    if (this.config.isDefault == true) {
+    if (this.config.isDefault === true) {
       this.config.isDefault = false;
-      console.log('Warning: Server connection settings are the default for the framework.\nPlease set the FlHttpEndPoint to the provider with the name "flRequestEndPoint".');
+      // tslint:disable-next-line: max-line-length
+      console.log('Warning: Server connection settings are the default for the framework.\n' +
+        'Please set the FlHttpEndPoint to the provider with the name "flRequestEndPoint".');
     }
-    return (isEmpty(this.config.host) ? "" : endsWithCharAppend(this.config.host, "/") )
-    + endsWithCharAppend(this.config.contextName, "/")
-    + endsWithCharAppend(serviceName, "/")
-    + endsWithCharAppend(methodName, "/");
+    return (isEmpty(this.config.host) ? '' : endsWithCharAppend(this.config.host, '/'))
+      + endsWithCharAppend(this.config.contextName, '/')
+      + endsWithCharAppend(serviceName, '/')
+      + endsWithCharAppend(methodName, '/');
   }
 
 }
@@ -71,7 +76,7 @@ export interface FlHttpEndPoint {
   contextName: string;
   appVersion: string;
   versionName: string;
-  isDefault: boolean
+  isDefault: boolean;
 }
 export interface IReturnDto {
   result: ResultDto;
@@ -80,5 +85,5 @@ export interface ResultDto {
   success: boolean;
   message: string;
   msgId: string;
-  msgKind: Number;
+  msgKind: number;
 }

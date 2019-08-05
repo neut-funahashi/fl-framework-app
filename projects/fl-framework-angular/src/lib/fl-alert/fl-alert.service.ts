@@ -9,38 +9,42 @@ export class FlAlertService {
 
   constructor(private dialog: FlDialog) { }
 
-  show(text: String, title: String, flags: Number = AlertFlags.OK, kind: Number = AlertKinds.MSG_KIND_INFOMATION, width = "90%") {
+  show(text: string, title: string, flags: number = AlertFlags.OK, kind: number = AlertKinds.MSG_KIND_INFOMATION, width = '90%') {
     return this._show(this.dialog, text, title, flags, kind, width);
   }
-  showError(text: String, title: String, flags: Number = AlertFlags.OK, width = "90%") {
+  showError(text: string, title: string, flags: number = AlertFlags.OK, width = '90%') {
     return this._show(this.dialog, text, title, flags, AlertKinds.MSG_KIND_ERROR, width);
   }
-  showInfo(text: String, title: String, flags: Number = AlertFlags.OK, width = "90%") {
+  showInfo(text: string, title: string, flags: number = AlertFlags.OK, width = '90%') {
     return this._show(this.dialog, text, title, flags, AlertKinds.MSG_KIND_INFOMATION, width);
   }
-  showQuestion(text: String, title: String, flags: Number = AlertFlags.OK | AlertFlags.CANCEL, width = "90%") {
+  showQuestion(text: string, title: string, flags: number = AlertFlags.OK + AlertFlags.CANCEL, width = '90%') {
     return this._show(this.dialog, text, title, flags, AlertKinds.MSG_KIND_QUESTION, width);
   }
-  showWarning(text: String, title: String, flags: Number = AlertFlags.YES | AlertFlags.NO, width = "90%") {
+  showWarning(text: string, title: string, flags: number = AlertFlags.YES + AlertFlags.NO, width = '90%') {
     return this._show(this.dialog, text, title, flags, AlertKinds.MSG_KIND_WARNING, width);
   }
-  showComplete(text: String, title: String, flags: Number = AlertFlags.OK, width = "90%") {
+  showComplete(text: string, title: string, flags: number = AlertFlags.OK, width = '90%') {
     return this._show(this.dialog, text, title, flags, AlertKinds.MSG_KIND_COMPLETE, width);
   }
-  showCallback(text: String, title: String, callbackFunc:(e?)=>void, flags: Number = AlertFlags.OK, kind: Number = AlertKinds.MSG_KIND_INFOMATION, width = "90%") {
+  showCallback(text: string, title: string,
+               callbackFunc: (e?: any) => void, flags: number = AlertFlags.OK,
+               kind: number = AlertKinds.MSG_KIND_INFOMATION, width = '90%') {
     return this._show(this.dialog, text, title, flags, kind, width, callbackFunc);
   }
-  private _show(dialog: FlDialog, text: String, title: String, flags: Number = AlertFlags.OK, kind: Number = AlertKinds.MSG_KIND_INFOMATION, width = "200px", callbackFunc?:(e?)=>void) {
+  private _show(dialog: FlDialog, text: string, title: string,
+                flags: number = AlertFlags.OK, kind: number = AlertKinds.MSG_KIND_INFOMATION,
+                width = '200px', callbackFunc?: (e?: any) => void) {
     (document.activeElement as any).blur();
     const dialogRef = dialog.open(FlAlertComponent, {
       data: {
-        title: title,
-        text: text,
-        flags: flags,
-        kind: kind,
+        title,
+        text,
+        flags,
+        kind,
         callback : callbackFunc
       },
-      width: width
+      width
     });
     return dialogRef.afterClosed();
   }
