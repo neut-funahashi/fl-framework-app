@@ -42,7 +42,7 @@ export class FlAlertService {
         text,
         flags,
         kind,
-        callback : callbackFunc
+        callback: callbackFunc
       },
       width
     });

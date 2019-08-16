@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FlAlertService, FlComponentBase } from 'fl-framework-angular';
+import { Component } from '@angular/core';
+import { FlComponentBase, AlertLabels } from 'fl-framework-angular';
 import { WaitDialogService } from 'fl-framework-angular';
-import { isEmpty,clearCanvas } from 'fl-framework-angular';
-import { FlHttpRequestService } from 'fl-framework-angular';
+import { clearCanvas } from 'fl-framework-angular';
+
 
 @Component({
   selector: 'app-root',
@@ -10,32 +10,24 @@ import { FlHttpRequestService } from 'fl-framework-angular';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent extends FlComponentBase {
+  title = 'framework-app';
+  public lineW: number;
+
   initializeView(): void {
   }
   createCompleteView(): void {
   }
-  public lineW:Number;
-
-  ngOnInit(): void {
-    // setTimeout(()=>{
-    //   this.flService.post('Test','init',{}).subscribe((e)=>{
-
-    //   });
-    //   this.waitDialog.show();
-    //   setTimeout(()=>{
-    //     this.waitDialog.close();
-    //     this.alert.show('a',"b");
-    //   },1000);
-    // },500);
+  onClick(): void {
+    this.labels.updateLabels('はい', 'いいえ', 'OK', 'キャンセル');
+    this.flAlert.showQuestion(this.title, 'クリックしましたか？');
   }
-  title = 'framework-app';
-
-  clearCanvas(element:HTMLCanvasElement) {
+  clearCanvas(element: HTMLCanvasElement) {
     clearCanvas(element);
   }
 
-  constructor(private waitDialog:WaitDialogService) {
+  constructor(private waitDialog: WaitDialogService, private labels: AlertLabels) {
     super();
+    labels.setDefault();
     this.lineW = 1;
   }
 }

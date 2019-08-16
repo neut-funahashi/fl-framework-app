@@ -6,9 +6,9 @@
     {{data.text}}
   </div>
   <div class="dialog-btn-box">
-    <button mat-raised-button class="dialog-btn-mrl5" (click)="yesOnClick()" color="basic" *ngIf="showYes">{{yesLabel}}</button>
-    <button mat-raised-button class="dialog-btn-mrl5" (click)="noOnClick()" color="basic" *ngIf="showNo" cdkFocusInitial>{{noLabel}}</button>
-    <button mat-raised-button class="dialog-btn-mrl5" (click)="okOnClick()" color="basic" *ngIf="showOk">{{okLabel}}</button>
-    <button mat-raised-button class="dialog-btn-mrl5" (click)="cancelOnClick()" color="basic" *ngIf="showCancel" cdkFocusInitial>{{cancelLabel}}</button>
+    <button mat-raised-button class="dialog-btn-mrl5" (click)="yesOnClick()" color="basic" *ngIf="showYes">{{labels.YES_LABEL}}</button>
+    <button mat-raised-button class="dialog-btn-mrl5" (click)="noOnClick()" color="basic" *ngIf="showNo" cdkFocusInitial>{{labels.NO_LABEL}}</button>
+    <button mat-raised-button class="dialog-btn-mrl5" (click)="okOnClick()" color="basic" *ngIf="showOk">{{labels.OK_LABEL}}</button>
+    <button mat-raised-button class="dialog-btn-mrl5" (click)="cancelOnClick()" color="basic" *ngIf="showCancel" cdkFocusInitial>{{labels.CANCEL_LABEL}}</button>
   </div>
 </mat-card>

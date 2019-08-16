@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Injectable } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { isEmpty } from '../utils/fi-utils';
+import { AlertLabels } from './fl-alert.labels';
 
 export enum AlertFlags {
   YES = 0x0001,
@@ -18,17 +18,14 @@ export enum AlertKinds {
    * メッセージの種類：問い
    */
   MSG_KIND_QUESTION = 1,
-
   /**
    * メッセージの種類：完了
    */
   MSG_KIND_COMPLETE = 2,
-
   /**
    * メッセージの種類：警告
    */
   MSG_KIND_WARNING = 3,
-
   /**
    * メッセージの種類：エラー
    */
@@ -43,11 +40,6 @@ export enum AlertKinds {
 })
 export class FlAlertComponent implements OnInit {
 
-  public yesLabel = 'Yes';
-  public noLabel = 'No';
-  public okLabel = 'OK';
-  public cancelLabel = 'Cancel';
-
   public showYes = true;
   public showNo = true;
   public showOk = true;
@@ -61,11 +53,6 @@ export class FlAlertComponent implements OnInit {
     this.showNo = ((data.flags & AlertFlags.NO) !== 0) ? true : false;
     this.showOk = ((data.flags & AlertFlags.OK) !== 0) ? true : false;
     this.showCancel = ((data.flags & AlertFlags.CANCEL) !== 0) ? true : false;
-
-    this.okLabel = labels.OK_LABEL;
-    this.yesLabel = labels.YES_LABEL;
-    this.noLabel = labels.NO_LABEL;
-    this.cancelLabel = labels.CANCEL_LABEL;
 
     switch (data.kind) {
       case AlertKinds.MSG_KIND_INFOMATION:
@@ -106,36 +93,5 @@ export class FlAlertComponent implements OnInit {
       this.data.callback(result);
     }
     this.dialogRef.close(result);
-  }
-}
-@Injectable({
-  providedIn: 'root'
-})
-export class AlertLabels {
-  YES_LABEL = 'Yes';
-  NO_LABEL = 'No';
-  OK_LABEL = 'OK';
-  CANCEL_LABEL = 'Cancel';
-
-  updateLabels(yesLabel?: string, noLabel?: string, okLabel?: string, cancelLabel?: string) {
-    if (!isEmpty(yesLabel)) {
-      this.YES_LABEL = yesLabel;
-    }
-    if (!isEmpty(noLabel)) {
-      this.NO_LABEL = noLabel;
-    }
-    if (!isEmpty(okLabel)) {
-      this.OK_LABEL = okLabel;
-    }
-    if (!isEmpty(cancelLabel)) {
-      this.CANCEL_LABEL = cancelLabel;
-    }
-  }
-
-  setDefault() {
-    this.YES_LABEL = 'Yes';
-    this.NO_LABEL = 'No';
-    this.OK_LABEL = 'OK';
-    this.CANCEL_LABEL = 'Cancel';
   }
 }

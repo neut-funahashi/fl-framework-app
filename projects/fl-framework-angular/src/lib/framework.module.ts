@@ -1,4 +1,4 @@
-import { Injector, Injectable } from '@angular/core';
+import { Injector } from '@angular/core';
 import { FlServiceInjector } from './core/fl-service-injector';
 import { FlAlertComponent } from './fl-alert/fl-alert.component';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';

@@ -7,6 +7,7 @@ export * from './lib/decorators/fl-decorators';
 export * from './lib/dialog/fl-dialog';
 export * from './lib/directives/drawing-directive';
 export * from './lib/directives/parent-click-directive';
+export * from './lib/fl-alert/fl-alert.labels';
 export * from './lib/fl-alert/fl-alert.service';
 export * from './lib/fl-alert/fl-alert.component';
 export * from './lib/http/fl-http-client.service';
