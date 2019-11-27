@@ -17,7 +17,7 @@ export class FlHttpRequestService {
               @Inject('flRequestEndPoint') private config: FlHttpEndPoint,
               private alert: FlAlertService) { }
 
-  public post<T extends IReturnDto>(serviceName: string,
+  public postAny<T extends any>(serviceName: string,
                                     methodName: string,
                                     param: any,
                                     isDisplay: boolean = true,
@@ -52,6 +52,14 @@ export class FlHttpRequestService {
             , 'Error', AlertFlags.OK);
         })
       );
+  }
+
+  public post<T extends IReturnDto>(serviceName: string,
+                                    methodName: string,
+                                    param: any,
+                                    isDisplay: boolean = true,
+                                    isErrorAlert: boolean = true): Observable<T> {
+    return this.postAny<T>(serviceName,methodName,param,isDisplay,isErrorAlert);
   }
 
   private createUrl(serviceName: string, methodName: string): string {
