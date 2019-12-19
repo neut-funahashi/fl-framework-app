@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { FlAlertService } from '../fl-alert/fl-alert.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 import { FlHttpClientService } from './fl-http-client.service';
 import { Observable } from 'rxjs';
 import { endsWithCharAppend, isEmpty } from '../utils/fi-utils';
@@ -13,15 +12,19 @@ import { tap } from 'rxjs/operators';
 })
 export class FlHttpRequestService {
 
-  constructor(private http: FlHttpClientService,
-              @Inject('flRequestEndPoint') private config: FlHttpEndPoint,
-              private alert: FlAlertService) { }
+  constructor(
+    private http: FlHttpClientService,
+    @Inject('flRequestEndPoint') private config: FlHttpEndPoint,
+    private alert: FlAlertService
+  ) { }
 
-  public postAny<T extends any>(serviceName: string,
-                                    methodName: string,
-                                    param: any,
-                                    isDisplay: boolean = true,
-                                    isErrorAlert: boolean = true): Observable<T> {
+  public postAny<T extends any>(
+    serviceName: string,
+    methodName: string,
+    param: any,
+    isDisplay: boolean = true,
+    isErrorAlert: boolean = true
+  ): Observable<T> {
     const flHeaders = {};
     flHeaders['FRAMEWORK-HTTP-HEADER'] = this.config.appVersion;
     flHeaders[this.config.versionName] = this.config.appVersion;
@@ -54,12 +57,13 @@ export class FlHttpRequestService {
       );
   }
 
-  public post<T extends IReturnDto>(serviceName: string,
-                                    methodName: string,
-                                    param: any,
-                                    isDisplay: boolean = true,
-                                    isErrorAlert: boolean = true): Observable<T> {
-    return this.postAny<T>(serviceName,methodName,param,isDisplay,isErrorAlert);
+  public post<T extends IReturnDto>(
+    serviceName: string,
+    methodName: string,
+    param: any,
+    isDisplay: boolean = true,
+    isErrorAlert: boolean = true): Observable<T> {
+    return this.postAny<T>(serviceName, methodName, param, isDisplay, isErrorAlert);
   }
 
   private createUrl(serviceName: string, methodName: string): string {

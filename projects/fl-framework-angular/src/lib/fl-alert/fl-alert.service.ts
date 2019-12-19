@@ -35,7 +35,9 @@ export class FlAlertService {
   private _show(dialog: FlDialog, text: string, title: string,
                 flags: number = AlertFlags.OK, kind: number = AlertKinds.MSG_KIND_INFOMATION,
                 width = '200px', callbackFunc?: (e?: any) => void) {
-    (document.activeElement as any).blur();
+    if (document.activeElement && (document.activeElement as any).blur ) {
+      (document.activeElement as any).blur();
+    }
     const dialogRef = dialog.open(FlAlertComponent, {
       data: {
         title,
