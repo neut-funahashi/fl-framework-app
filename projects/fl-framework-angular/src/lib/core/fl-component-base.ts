@@ -1,5 +1,5 @@
 import { OnInit, Inject, Injector, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
-import { FlHttpRequestService } from '../http/fl-http-request.service';
+import { FlHttpRequestService, IReturnDto } from '../http/fl-http-request.service';
 import { FlServiceInjector } from './fl-service-injector';
 import { Observable } from 'rxjs';
 import { FlAlertService } from '../fl-alert/fl-alert.service';
@@ -40,7 +40,7 @@ export abstract class FlComponentBase implements OnInit, AfterViewInit, AfterVie
   }
 
   public ngAfterViewChecked() {
-    this.updateView();
+    // this.updateView();
   }
 
   public ngOnDestroy(): any {
@@ -65,21 +65,23 @@ export abstract class FlComponentBase implements OnInit, AfterViewInit, AfterVie
     this.location = FlServiceInjector.injector.get(Location);
     this.actRoute = FlServiceInjector.injector.get(ActivatedRoute);
   }
-  protected init(param: any, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<object> {
-    return this.callCustomService(this.serviceName, 'init', param, isDisplay, isErrAlert);
+  protected init<T extends IReturnDto>(param: any, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<T> {
+    return this.callCustomService<T>(this.serviceName, 'init', param, isDisplay, isErrAlert);
   }
-  protected search(param, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<object> {
-    return this.callCustomService(this.serviceName, 'search', param, isDisplay, isErrAlert);
+  protected search<T extends IReturnDto>(param, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<T> {
+    return this.callCustomService<T>(this.serviceName, 'search', param, isDisplay, isErrAlert);
   }
-  protected regist(param, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<object> {
-    return this.callCustomService(this.serviceName, 'regist', param, isDisplay, isErrAlert);
+  protected regist<T extends IReturnDto>(param, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<T> {
+    return this.callCustomService<T>(this.serviceName, 'regist', param, isDisplay, isErrAlert);
   }
-  protected callService(methodName: string, param: any, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<object> {
-    return this.callCustomService(this.serviceName, methodName, param, isDisplay, isErrAlert);
+  protected callService<T extends IReturnDto>(
+    methodName: string, param: any, isDisplay: boolean = true, isErrAlert: boolean = true): Observable<T> {
+    return this.callCustomService<T>(this.serviceName, methodName, param, isDisplay, isErrAlert);
   }
-  protected callCustomService(serviceName: string, methodName: string, param: any,
-                              isDisplay: boolean = true, isErrAlert: boolean = true): Observable<object> {
-    return this.flService.post(serviceName, methodName, param, isDisplay, isErrAlert);
+  protected callCustomService<T extends IReturnDto>(
+    serviceName: string, methodName: string, param: any,
+    isDisplay: boolean = true, isErrAlert: boolean = true): Observable<T> {
+    return this.flService.post<T>(serviceName, methodName, param, isDisplay, isErrAlert);
   }
   protected saveFile(blob: Blob, fileName: string) {
     if (window.navigator.msSaveBlob) {
