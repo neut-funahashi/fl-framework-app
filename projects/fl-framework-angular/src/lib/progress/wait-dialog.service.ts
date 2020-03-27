@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
 import { FlDialog } from '../dialog/fl-dialog';
 import { WaitDialogComponent } from './wait-dialog.component';
 

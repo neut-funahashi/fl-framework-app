@@ -1,7 +1,7 @@
 import { Injector } from '@angular/core';
 import { FlServiceInjector } from './core/fl-service-injector';
 import { FlAlertComponent } from './fl-alert/fl-alert.component';
-import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ParentClickDirective } from './directives/parent-click-directive';
 import { DrawingDirective } from './directives/drawing-directive';
 import { WaitDialogComponent } from './progress/wait-dialog.component';

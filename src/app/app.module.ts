@@ -1,6 +1,7 @@
 import { Injector, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlFrameworkModule, FrameworkModule, FrameworkProviders } from 'fl-framework-angular';
 import { AppRoutingModule } from './app-routing.module';
