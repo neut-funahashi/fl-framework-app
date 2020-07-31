@@ -13,5 +13,8 @@
   },
   "keywords": [
     "angular"
-  ]
+  ],
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
 }
