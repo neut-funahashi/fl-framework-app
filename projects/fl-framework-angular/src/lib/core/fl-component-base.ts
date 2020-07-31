@@ -1,4 +1,4 @@
-import { OnInit, Inject, Injector, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { OnInit, Inject, Injector, AfterViewInit, AfterViewChecked, OnDestroy, Directive } from '@angular/core';
 import { FlHttpRequestService, IReturnDto } from '../http/fl-http-request.service';
 import { FlServiceInjector } from './fl-service-injector';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 // import * as moment from 'moment';
 
 // @dynamic
+@Directive()
 export abstract class FlComponentBase implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
 
   protected flService: FlHttpRequestService;
