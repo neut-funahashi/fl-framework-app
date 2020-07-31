@@ -1,11 +1,11 @@
 {
   "name": "fl-framework-angular",
-  "version": "9.0.0-beta.1",
+  "version": "10.0.0-beta.1",
   "license" : "MIT",
   "peerDependencies": {
-    "@angular/common": "^9.1.0",
-    "@angular/core": "^9.1.0",
-    "@angular/flex-layout": "^9.0.0-beta.29"
+    "@angular/common": "~10.0.7",
+    "@angular/core": "~10.0.7",
+    "@angular/flex-layout": "^10.0.0-beta.32"
   },
   "repository": {
     "type": "git",
