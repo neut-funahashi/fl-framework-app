@@ -45,9 +45,9 @@ export class FlHttpRequestService {
             // 権限エラー
             // 再描画が必要なパターン
             // メッセージ表示
-            if (isErrorAlert && result.result && !result.result.success) {
+            if (isErrorAlert && (result as any).result && !(result as any).result.success) {
 
-              this.alert.show(result.result.message, result.result.msgId, AlertFlags.OK, result.result.msgKind);
+              this.alert.show((result as any).result.message, (result as any).result.msgId, AlertFlags.OK, (result as any).result.msgKind);
             }
           }
         }, (error) => {

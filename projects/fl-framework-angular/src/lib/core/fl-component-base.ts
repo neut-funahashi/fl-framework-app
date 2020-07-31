@@ -9,7 +9,6 @@ import { Location } from '@angular/common';
 // import * as moment from 'moment';
 
 // @dynamic
-@Directive()
 export abstract class FlComponentBase implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
 
   protected flService: FlHttpRequestService;
