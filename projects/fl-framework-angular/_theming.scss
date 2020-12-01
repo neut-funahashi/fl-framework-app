@@ -12,3 +12,22 @@
         stroke: $color!important;
     }
 }
+
+html {
+  overflow: hidden !important;
+  //11
+  font-size: 68.75%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  background-color: #ffffff;
+  color: #212121;
+  font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+}

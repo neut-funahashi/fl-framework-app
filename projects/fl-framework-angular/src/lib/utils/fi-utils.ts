@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { FlServiceInjector } from '../core/fl-service-injector';
+import { IReturnDto } from '../http/fl-http-request.service';
 
 export function endsWithCharAppend(src: string, char: string) {
   if (src === undefined || src == null) { return ''; }
@@ -8,8 +9,13 @@ export function endsWithCharAppend(src: string, char: string) {
   }
   return src + char;
 }
+
 export function isEmpty(value: any): boolean {
   return (value == null || value === undefined || value === '');
+}
+
+export function isSuccess(value: IReturnDto): boolean {
+  return (value && value.result && value.result.success);
 }
 
 export function clearCanvas(element: HTMLCanvasElement): void {
