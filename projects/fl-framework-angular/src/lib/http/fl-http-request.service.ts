@@ -51,8 +51,10 @@ export class FlHttpRequestService {
             }
           }
         }, (error) => {
-          this.alert.showError('サーバとの通信に失敗しました。\n申し訳ございませんが、しばらくしてから再度実行してください。'
+          if (isErrorAlert) {
+            this.alert.showError('サーバとの通信に失敗しました。\n申し訳ございませんが、しばらくしてから再度実行してください。'
             , 'Error', AlertFlags.OK);
+          }
         })
       );
   }
