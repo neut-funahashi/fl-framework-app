@@ -40,6 +40,8 @@ export class AppModule extends FrameworkModule {
   }
 }
 ```
+*required RouterModule
+
 ### app.component.ts
  ```TypeScript
  import { Component } from '@angular/core';
