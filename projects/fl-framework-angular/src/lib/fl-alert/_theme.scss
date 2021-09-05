@@ -1,5 +1,3 @@
-@import '~@angular/material/theming';
-
 @mixin fl-alert-theme($info:#53c1dc, $question:#2a7cb4, $complete:#59b764,$warning:#f3ab58,$error:#F44336) {
     .dialog-kind-information {
         background-color: $info;
